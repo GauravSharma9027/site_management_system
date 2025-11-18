@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaFacebookSquare, FaTwitter, FaUser } from "react-icons/fa";
 import { RiInstagramFill, RiLockPasswordFill, RiLoader4Line } from "react-icons/ri";
 import { IoLogoYoutube } from "react-icons/io";
-import logo from '../assets/logo2.png'
+import logo from '../assets/Logo2.png'
 import InputField from '../components/ui/InputField';
 import Button from '../components/button/Button';
 import { toast } from 'react-toastify';
