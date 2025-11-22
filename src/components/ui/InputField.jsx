@@ -1,5 +1,5 @@
 import React from "react";
-
+import { twMerge } from "tailwind-merge";
 export default function InputField({
   label,
   type = "text",
@@ -10,12 +10,14 @@ export default function InputField({
   placeholder = "",
   labelClass = "",
   inputClass = "",
+  min,
+  max
 }) {
   return (
     <div className="w-full px-2">
       {/* Label + Icon */}
       <label
-        className={`text-white text-lg font-semibold flex items-center justify-between  ${labelClass}`}
+        className={`${twMerge("text-white text-lg font-semibold flex items-center justify-between", labelClass)}`}
       >
         <span>{label}</span>
         {Icon && <Icon className="text-white text-lg" />}
@@ -28,8 +30,9 @@ export default function InputField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`
-          w-full 
+        max={max}
+        min={min}
+        className={twMerge(`w-full 
           bg-transparent 
           border-b-3
           border-gray-500 
@@ -38,9 +41,7 @@ export default function InputField({
           text-white 
           p-1 
           transition-all 
-          duration-200
-          ${inputClass}
-        `}
+          duration-200`, inputClass)}
       />
     </div>
   );

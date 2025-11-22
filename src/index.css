@@ -3,3 +3,7 @@ body {
   background-color: #08040e;
   color: white;
 }
+
+@theme {
+  --breakpoint-xs: 350px;
+}
