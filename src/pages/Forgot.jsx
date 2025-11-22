@@ -49,7 +49,7 @@ const Forgot = () => {
                     </div>
                     {/* right form */}
                     <div className='space-y-4 flex flex-col justify-center items-center p-10'>
-                        <h1 className='text-2xl xs:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold font-[Comic_Sans_MS] text-black text-nowrap'>Forgot <br />Your Password ?</h1>
+                        <h1 className='mb-6 sm:mb-0 text-2xl xs:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold font-[Comic_Sans_MS] text-black text-nowrap'>Forgot <br />Your Password ?</h1>
                         <InputField
                             label="Admin ID"
                             labelClass='text-black text-sm'
@@ -76,7 +76,7 @@ const Forgot = () => {
                                     <Button text="Get OTP" onClick={otpSendHandler} className="h-8 w-24 mr-2 rounded-[50rem] flex justify-center items-center text-xs bg-gradient-to-b from-green-700 via-green-400 to-green-700" />
                             }
                         </div>
-                        <div className='px-2 w-full mt-2'>
+                        <div className='px-2 w-full mt-6 sm:mt-2'>
                             <Ripples color="rgba(0,0,0,0.3)" className="w-full rounded-xl">
                                 <Button text="Reset Password" className="py-1 rounded-[50rem] flex justify-center items-center text-lg bg-gradient-to-b from-[#260e4d] via-[#6b22e1] to-[#260e4d]" />
                             </Ripples>
