@@ -49,7 +49,7 @@ const Forgot = () => {
                     </div>
                     {/* right form */}
                     <div className='space-y-4 flex flex-col justify-center items-center p-10'>
-                        <h1 className='mb-6 sm:mb-0 text-2xl xs:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold font-[Comic_Sans_MS] text-black text-nowrap'>Forgot <br />Your Password ?</h1>
+                        <h1 className='mb-6 text-2xl xs:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold font-[Comic_Sans_MS] text-black text-nowrap'>Forgot <br />Your Password ?</h1>
                         <InputField
                             label="Admin ID"
                             labelClass='text-black text-sm'
