@@ -76,7 +76,7 @@ const Forgot = () => {
                             }
                         </div>
                         <div className='px-2 w-full mt-6 sm:mt-2'>
-                            <Ripples color="rgba(0,0,0,0.3)" className="w-full rounded-xl">
+                            <Ripples color="rgba(0,0,0,0.3)" className="w-full hover:scale-x-105 duration-500 transition transform rounded-[50rem]">
                                 <Button text="Reset Password" className="py-1 rounded-[50rem] flex justify-center items-center text-lg text-[#fff] bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7]" />
                             </Ripples>
                         </div>
