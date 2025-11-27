@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Forgot from './pages/Forgot'
 import CreateContractForm from './pages/CreateContractForm'
 import MainLayout from './layout/MainLayout'
+import SiteDetails from './pages/SiteDetails'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/' element={<MainLayout />} >
             <Route index element={<HomePage/>} />
             <Route path='/createContractPage' element={<CreateContractForm />} />
+            <Route path='/site-details' element={<SiteDetails/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

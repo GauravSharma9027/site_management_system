@@ -9,7 +9,7 @@ export default function Header() {
     const headerItems = [
         { path: "/", label: "Home", icon: <MdHome size={20} /> },
         { path: "/createContractPage", label: "Contract Page", icon: <MdAssignment size={20} /> },
-        { path: "#", label: "Site Detail", icon: <MdInfo size={20} /> },
+        { path: "/site-details", label: "Site Detail", icon: <MdInfo size={20} /> },
         { path: "#", icon: <FaUserCircle size={30} /> },
     ];
 
