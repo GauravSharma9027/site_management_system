@@ -293,7 +293,8 @@ export default function CreateContractPage() {
               Contract Dashboard
             </button>
           </div>
-          */}
+          */
+          }
                 </div>
             </div>
 

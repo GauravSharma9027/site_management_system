@@ -80,7 +80,7 @@ const Login = () => {
                         </div>
                         {
                             loader ?
-                                <Button onClick={formSubmit} text={<RiLoader4Line size={30} className='transition-all animate-spin font-bold' />} className="flex justify-center items-center font-bold rounded-[50rem] py-2 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " /> :
+                                <Button onClick={formSubmit} text={<RiLoader4Line size={30} className='transition-all animate-spin font-bold' />} className="flex justify-center items-center font-bold rounded-[50rem] py-1 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " /> :
                                 <Button onClick={formSubmit} text="Login" className="flex justify-center items-center font-bold rounded-[50rem] py-2 lg:py-1 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " />
                         }
                         <div className='px-2 flex justify-end w-full'>
@@ -90,7 +90,7 @@ const Login = () => {
                 </div>
             </div>
             {/* for mobile view*/}
-            <div className='md:hidden w-[85vw] sm:w-[60vw] rounded-xl ring-3 ring-gray-500 shadow-[0px_0px_20px_8px_#792aea]'>
+            <div className='md:hidden w-[85vw] sm:w-[60vw] rounded-xl ring-3 ring-[#4acfff] shadow-[0px_0px_20px_8px_#016a90]'>
                 <div className='py-5 md:py-7 px-6 sm:px-8 h-full w-full flex flex-col items-center bg-gradient-to-tr from-[#015f82] to-[#00AFEF] rounded-xl '>
                     {/* logo */}
                     <div className='w-full hidden xs:block'>
@@ -127,7 +127,7 @@ const Login = () => {
                             <div className='w-full px-2'>
                                 {
                                     loader ?
-                                        <Button onClick={formSubmit} text={<RiLoader4Line size={30} className='transition-all animate-spin font-bold' />} className="flex justify-center items-center font-bold rounded-[50rem] py-0 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " /> :
+                                        <Button onClick={formSubmit} text={<RiLoader4Line size={30} className='transition-all animate-spin font-bold' />} className="flex justify-center items-center font-bold rounded-[50rem] py-2 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " /> :
                                         <Ripples color="rgba(0,0,0,0.3)" className="w-full hover:scale-x-105 duration-500 transition transform rounded-[50rem]">
                                             <Button onClick={formSubmit} text="Login" className="flex justify-center items-center font-bold rounded-[50rem] py-2 bg-gradient-to-b from-[#0693c7] via-[#01ddff] to-[#0693c7] " />
                                         </Ripples>
