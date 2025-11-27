@@ -449,7 +449,7 @@ export default function SiteDeatil() {
                   onChange={handleChange}
                   disabled
                   placeholder="Latitude"
-                  className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-800 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-[#003f9a] focus:border-[#003f9a]"
+                  className="mt-2 w-full rounded-lg cursor-not-allowed border border-gray-300 bg-white px-3 py-2 text-gray-800 placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-[#003f9a] focus:border-[#003f9a]"
                 />
                 {errors.latitude && (
                   <p className="text-red-500 text-sm">{errors.latitude}</p>
