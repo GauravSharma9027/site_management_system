@@ -159,14 +159,14 @@ export default function CreateContractPage() {
             <div className="flex-1 bg-gray-50">
                 <div className="max-w-[1100px] mx-auto px-4 py-6">
                     {/* Top bar summary */}
-                    <div className="mb-6 flex items-center justify-between">
-                        <div>
+                    <div className="mb-6 lg:flex items-center justify-between">
+                        <div className="">
                             {/* Heading in brand blue */}
-                            <h2 className="text-[#003f9a] font-bold text-2xl tracking-wide">Project contracts</h2>
-                            <p className="text-gray-600 text-sm mt-1">Use search and filters to refine results</p>
+                            <h2 className="text-[#003f9a] font-bold text-4xl tracking-wide">Project contracts</h2>
+                            <p className="text-gray-600 text-base mt-1">Use search and filters to refine results</p>
                         </div>
-                        <div className="text-right">
-                            <p className="text-gray-500 text-xs">Total value (visible page)</p>
+                        <div className="mt-3 lg:mt-0 lg:text-right">
+                            <p className="text-gray-500 text-lg md:text-xs">Total value (visible page)</p>
                             <p className="text-[#003f9a] font-semibold">
                                 {formatINR(pageItems.reduce((sum, p) => sum + p.totalValue, 0))}
                             </p>
