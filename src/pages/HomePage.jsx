@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../components/layout/Footer'
+import ScopeOfWork from '../components/pages/createContractForm/ScopeOfWork'
 
 const HomePage = () => {
     return (

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import ScopeOfWorkModal from "../components/pages/createContractForm/ScopeOfWork";
 
 /* ---------- Utilities ---------- */
 
@@ -153,156 +154,145 @@ export default function CreateContractPage() {
 
     const selectedProject = projects.find((p) => p.projectId === selectedId) || null;
 
+
+    const [showScopeOfWorkModal, setShowScopeOfWorkModal] = useState(false)
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50">
-            {/* Bottom 50% neutral background */}
-            <div className="flex-1 bg-gray-50">
-                <div className="max-w-[1100px] mx-auto px-4 py-6">
-                    {/* Top bar summary */}
-                    <div className="mb-6 lg:flex items-center justify-between">
-                        <div className="">
-                            {/* Heading in brand blue */}
-                            <h2 className="text-[#003f9a] font-bold text-4xl tracking-wide">Project contracts</h2>
-                            <p className="text-gray-600 text-base mt-1">Use search and filters to refine results</p>
+        <>
+            <div className="min-h-screen flex flex-col bg-gray-50">
+                {/* Bottom 50% neutral background */}
+                <div className="flex-1 bg-gray-50">
+                    <div className="max-w-[1100px] mx-auto px-4 py-6">
+                        {/* Top bar summary */}
+                        <div className="mb-6 lg:flex items-center justify-between">
+                            <div className="">
+                                {/* Heading in brand blue */}
+                                <h2 className="text-[#003f9a] font-bold text-3xl sm:text-4xl tracking-wide text-nowrap">Project contracts</h2>
+                                <p className="text-gray-600 text-base mt-1">Use search and filters to refine results</p>
+                            </div>
+                            <div className="mt-3 lg:mt-0 lg:text-right">
+                                <p className="text-gray-500 text-lg md:text-xs">Total value (visible page)</p>
+                                <p className="text-[#003f9a] font-semibold">
+                                    {formatINR(pageItems.reduce((sum, p) => sum + p.totalValue, 0))}
+                                </p>
+                            </div>
                         </div>
-                        <div className="mt-3 lg:mt-0 lg:text-right">
-                            <p className="text-gray-500 text-lg md:text-xs">Total value (visible page)</p>
-                            <p className="text-[#003f9a] font-semibold">
-                                {formatINR(pageItems.reduce((sum, p) => sum + p.totalValue, 0))}
-                            </p>
-                        </div>
-                    </div>
 
-                    {/* Controls */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-                            <div className="md:col-span-2">
-                                <label className="text-gray-700 text-xs">Search</label>
-                                <div className="mt-1 relative">
-                                    <input
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        placeholder="Search by Project ID, Company or Name"
-                                        className="w-full bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
-                                    />
-                                    <span className="absolute right-3 top-2.5 text-gray-400 text-sm">⌕</span>
+                        {/* Controls */}
+                        <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                                <div className="md:col-span-2">
+                                    <label className="text-gray-700 text-xs">Search</label>
+                                    <div className="mt-1 relative">
+                                        <input
+                                            value={search}
+                                            onChange={(e) => setSearch(e.target.value)}
+                                            placeholder="Search by Project ID, Company or Name"
+                                            className="w-full bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
+                                        />
+                                        <span className="absolute right-3 top-2.5 text-gray-400 text-sm">⌕</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div>
-                                <label className="text-gray-700 text-xs">Company</label>
-                                <select
-                                    value={companyFilter}
-                                    onChange={(e) => setCompanyFilter(e.target.value)}
-                                    className="mt-1 w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
-                                >
-                                    {uniqueCompanies.map((c) => (
-                                        <option key={c} value={c}>
-                                            {c}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="text-gray-700 text-xs">Status</label>
+                                    <label className="text-gray-700 text-xs">Company</label>
                                     <select
-                                        value={statusFilter}
-                                        onChange={(e) => setStatusFilter(e.target.value)}
+                                        value={companyFilter}
+                                        onChange={(e) => setCompanyFilter(e.target.value)}
                                         className="mt-1 w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
                                     >
-                                        {["All", "Planned", "Active", "On Hold", "Completed"].map((s) => (
-                                            <option key={s} value={s}>
-                                                {s}
+                                        {uniqueCompanies.map((c) => (
+                                            <option key={c} value={c}>
+                                                {c}
                                             </option>
                                         ))}
                                     </select>
                                 </div>
 
-                                <div>
-                                    <label className="text-gray-700 text-xs">Sort</label>
-                                    <select
-                                        value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
-                                        className="mt-1 w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
-                                    >
-                                        <option value="startDateAsc">Start date ↑</option>
-                                        <option value="endDateDesc">End date ↓</option>
-                                        <option value="valueDesc">Contract value ↓</option>
-                                        <option value="valueAsc">Contract value ↑</option>
-                                    </select>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="text-gray-700 text-xs">Status</label>
+                                        <select
+                                            value={statusFilter}
+                                            onChange={(e) => setStatusFilter(e.target.value)}
+                                            className="mt-1 w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
+                                        >
+                                            {["All", "Planned", "Active", "On Hold", "Completed"].map((s) => (
+                                                <option key={s} value={s}>
+                                                    {s}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-gray-700 text-xs">Sort</label>
+                                        <select
+                                            value={sortBy}
+                                            onChange={(e) => setSortBy(e.target.value)}
+                                            className="mt-1 w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#004bb8]"
+                                        >
+                                            <option value="startDateAsc">Start date ↑</option>
+                                            <option value="endDateDesc">End date ↓</option>
+                                            <option value="valueDesc">Contract value ↓</option>
+                                            <option value="valueAsc">Contract value ↑</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Content: no scroll container (removed max-h and overflow) */}
-                    <div className="space-y-4">
-                        {loading ? (
-                            <SkeletonList />
-                        ) : pageItems.length === 0 ? (
-                            <EmptyState onReset={() => { setSearch(""); setCompanyFilter("All"); setStatusFilter("All"); }} />
-                        ) : (
-                            pageItems.map((p) => (
-                                <ProjectCard
-                                    key={p.projectId}
-                                    project={p}
-                                    selected={selectedId === p.projectId}
-                                    onSelect={() => setSelectedId(p.projectId)}
-                                />
-                            ))
-                        )}
-                    </div>
-
-                    {/* Pagination (kept for dataset control) */}
-                    {!loading && totalPages > 1 && (
-                        <div className="mt-5 flex items-center justify-between text-gray-700">
-                            <p className="text-sm">Page {page} of {totalPages}</p>
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                                    className="px-3 py-2 rounded-lg border border-gray-300 hover:border-[#004bb8] hover:text-[#004bb8] transition"
-                                >
-                                    Prev
-                                </button>
-                                <button
-                                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                                    className="px-3 py-2 rounded-lg border border-gray-300 hover:border-[#004bb8] hover:text-[#004bb8] transition"
-                                >
-                                    Next
-                                </button>
-                            </div>
+                        {/* Content: no scroll container (removed max-h and overflow) */}
+                        <div className="space-y-4">
+                            {loading ? (
+                                <SkeletonList />
+                            ) : pageItems.length === 0 ? (
+                                <EmptyState onReset={() => { setSearch(""); setCompanyFilter("All"); setStatusFilter("All"); }} />
+                            ) : (
+                                pageItems.map((p) => (
+                                    <ProjectCard
+                                        key={p.projectId}
+                                        project={p}
+                                        selected={selectedId === p.projectId}
+                                        // onSelect={() => setSelectedId(p.projectId)}
+                                        onSelect={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)}
+                                    />
+                                ))
+                            )}
                         </div>
-                    )}
 
-                    {/* Action Buttons: commented out as requested */}
-                    {/*
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
-            <button
-              disabled={!selectedId}
-              className={`md:col-span-2 w-full py-3 rounded-lg text-gray-900 font-bold text-sm tracking-wide transition-all active:scale-[0.98] ${
-                selectedId ? "bg-yellow-300 hover:bg-yellow-400" : "bg-yellow-300/40 cursor-not-allowed"
-              }`}
-            >
-              NEXT
-            </button>
-            <button
-              className="w-full border border-gray-300 text-gray-700 hover:border-[#004bb8] hover:text-[#004bb8] py-3 rounded-lg font-medium text-sm tracking-wide transition-all active:scale-[0.98]"
-            >
-              Contract Dashboard
-            </button>
-          </div>
-          */
-          }
+                        {/* Pagination (kept for dataset control) */}
+                        {!loading && totalPages > 1 && (
+                            <div className="mt-5 flex items-center justify-between text-gray-700">
+                                <p className="text-sm">Page {page} of {totalPages}</p>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => setPage((p) => Math.max(1, p - 1))}
+                                        className="px-3 py-2 rounded-lg border border-gray-300 hover:border-[#004bb8] hover:text-[#004bb8] transition"
+                                    >
+                                        Prev
+                                    </button>
+                                    <button
+                                        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                                        className="px-3 py-2 rounded-lg border border-gray-300 hover:border-[#004bb8] hover:text-[#004bb8] transition"
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+      
+                        
+                    </div>
                 </div>
-            </div>
 
-            {/* Details Modal */}
-            {selectedProject && (
-                <DetailsModal project={selectedProject} onClose={() => setSelectedId(null)} />
-            )}
-        </div>
+                {/* Details Modal */}
+                {selectedProject && (
+                    <DetailsModal project={selectedProject} onClose={() => setSelectedId(null)} />
+                )}
+            </div>
+            <ScopeOfWorkModal className={` ${showScopeOfWorkModal?'fixed':'hidden'}`} onClick={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)} onClose={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)}/>
+        </>
     );
 }
 
@@ -338,7 +328,7 @@ function ProjectCard({ project, selected, onSelect }) {
                     <span className="inline-block w-2 h-2 rounded-full bg-[#004bb8]"></span>
                     <span>Click card to view details</span>
                 </div>
-                <button className="px-3 py-2 rounded-md text-xs font-semibold bg-gray-100 text-gray-900 hover:bg-gray-200 transition">
+                <button className="px-3 py-2 rounded-md text-xs text-nowrap font-semibold bg-gray-100 text-gray-900 hover:bg-gray-200 transition">
                     View summary
                 </button>
             </div>
@@ -398,41 +388,42 @@ function EmptyState({ onReset }) {
     );
 }
 
-function DetailsModal({ project, onClose }) {
-    return (
-        <div className=" px-4 fixed inset-0 z-50 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-            <div className="relative w-full max-w-2xl bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 p-6">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-bold text-[#003f9a]">Contract details</h2>
-                    <button
-                        onClick={onClose}
-                        className="px-3 py-1 rounded-md bg-gray-100 hover:bg-gray-200 transition"
-                    >
-                        Close
-                    </button>
-                </div>
+// function DetailsModal({ project, onClose }) {
+//     return (
+//         <div className=" px-4 fixed inset-0 z-50 flex items-center justify-center">
+//             <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+//             <div className="relative w-full max-w-2xl bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 p-6">
+//                 <div className="flex items-center justify-between">
+//                     <h2 className="text-lg font-bold text-[#003f9a]">Contract details</h2>
+//                     <button
+//                         onClick={onClose}
+//                         className="px-3 py-1 rounded-md bg-gray-100 hover:bg-gray-200 transition"
+//                     >
+//                         Close
+//                     </button>
+//                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <Field label="Project ID" value={project.projectId} />
-                    <Field label="Company Name" value={project.companyName} />
-                    <Field label="Project Name" value={project.projectName} />
-                    <Field label="Status" value={project.status} />
-                    <Info label="Start Date" value={project.startDate} />
-                    <Info label="End Date" value={project.endDate} />
-                    <Info label="Contract Value" value={formatINR(project.totalValue)} />
-                </div>
+//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+//                     <Field label="Project ID" value={project.projectId} />
+//                     <Field label="Company Name" value={project.companyName} />
+//                     <Field label="Project Name" value={project.projectName} />
+//                     <Field label="Status" value={project.status} />
+//                     <Info label="Start Date" value={project.startDate} />
+//                     <Info label="End Date" value={project.endDate} />
+//                     <Info label="Contract Value" value={formatINR(project.totalValue)} />
+//                 </div>
 
-                {/* Modal actions kept minimal for professional feel */}
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                    <button className="w-full bg-[#ffd54f] hover:bg-[#ffca28] py-3 rounded-lg text-gray-900 font-bold text-sm tracking-wide transition-all active:scale-[0.98]">
-                        Download Agreement PDF
-                    </button>
-                    <button className="w-full border border-gray-300 text-gray-700 hover:border-[#004bb8] hover:text-[#004bb8] py-3 rounded-lg font-medium text-sm tracking-wide transition-all active:scale-[0.98]">
-                        Download summary
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
+//                 {/* Modal actions kept minimal for professional feel */}
+//                 <div className="mt-6 grid grid-cols-2 gap-3">
+//                     <button className="w-full bg-[#ffd54f] hover:bg-[#ffca28] py-3 rounded-lg text-gray-900 font-bold text-sm tracking-wide transition-all active:scale-[0.98]">
+//                         Download Agreement PDF
+//                     </button>
+//                     <button className="w-full border border-gray-300 text-gray-700 hover:border-[#004bb8] hover:text-[#004bb8] py-3 rounded-lg font-medium text-sm tracking-wide transition-all active:scale-[0.98]">
+//                         Download summary
+//                     </button>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
