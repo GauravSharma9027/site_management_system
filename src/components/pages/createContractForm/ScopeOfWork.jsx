@@ -204,15 +204,101 @@ const ScopeOfWorkModal = ({ onClose, className }) => {
                     )}
 
                     {activeTab === "graph" && (
-                        <div className="h-full md:h-[45vh] lg:h-full flex flex-col justify-center items-center space-y-6 p-6 py-12 bg-gray-100 rounded-lg">
-                            <div className="w-full h-full  overflow-x-auto">
-                                <Bar data={chartData} options={chartOptions} />
+                        <div className="h-full md:h-[65vh] lg:h-full grid grid-cols-1 md:grid-cols-2 gap-6 p-6 py-12 bg-gray-100 rounded-lg">
+
+                            {/* Left Side: Dropdown + Job Work Details */}
+                            <div className="flex flex-col space-y-6">
+                                {/* Job Dropdown */}
+                                <div>
+                                    <label className="text-gray-700 font-medium">Select Job</label>
+                                    <select
+                                        className="w-full border rounded-md p-2 mt-1 text-gray-600 focus:ring-2 focus:ring-blue-500"
+                                        value={selectedJob.jobID}
+                                        onChange={(e) =>
+                                            setSelectedJob(
+                                                projectData.jobs.find(
+                                                    (job) => job.jobID === e.target.value
+                                                )
+                                            )
+                                        }
+                                    >
+                                        {projectData.jobs.map((job) => (
+                                            <option key={job.jobID} value={job.jobID}>
+                                                {job.jobID}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Job Work Details Card */}
+                                <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 space-y-4">
+                                    <h3 className="text-base font-semibold text-gray-800">
+                                        {selectedJob.jobID} Status
+                                    </h3>
+
+                                    {/* Completed */}
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-blue-600 font-medium">Completed</span>
+                                        <span className="text-blue-600 font-bold">
+                                            {selectedJob.progress}%
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <div
+                                            className="bg-blue-600 h-2 rounded-full"
+                                            style={{ width: `${selectedJob.progress}%` }}
+                                        />
+                                    </div>
+
+                                    {/* Remaining */}
+                                    <div className="flex items-center justify-between mt-2">
+                                        <span className="text-red-500 font-medium">Remaining</span>
+                                        <span className="text-red-500 font-bold">
+                                            {100 - selectedJob.progress}%
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <p className="text-sm text-gray-600">
-                                Each bar shows % work completed for respective Job ID
-                            </p>
+
+                            {/* Right Side: Pie Chart */}
+                            <div className="w-full h-full flex justify-center items-center bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                                <Bar
+                                    data={{
+                                        labels: ["Completed", "Remaining"],
+                                        datasets: [
+                                            {
+                                                data: [
+                                                    selectedJob.progress,
+                                                    100 - selectedJob.progress,
+                                                ],
+                                                backgroundColor: [
+                                                    "rgba(37, 99, 235, 0.9)", // Blue for completed
+                                                    "rgba(229, 231, 235, 0.9)", // Gray for remaining
+                                                ],
+                                            },
+                                        ],
+                                    }}
+                                    options={{
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            legend: { position: "bottom" },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: (context) =>
+                                                        `${context.label}: ${context.raw}%`,
+                                                },
+                                            },
+                                        },
+                                    }}
+                                    type="pie"
+                                />
+                            </div>
                         </div>
                     )}
+
+
+
                 </div>
             </div>
         </div>
