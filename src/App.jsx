@@ -11,7 +11,7 @@ import SiteDetails from './pages/SiteDetails'
 const App = () => {
   return (
     <div >
-      <BrowserRouter>
+      <BrowserRouter basename="/vendor">
         <ToastContainer position="top-right" autoClose={1000} />
         <Routes>
           <Route path='/login' element={<Login />} />

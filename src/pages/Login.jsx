@@ -32,7 +32,7 @@ const Login = () => {
         }, 2000);
     }
     return (
-        <div className='flex justify-center items-center w-screen py-8 lg:py-0 min-h-screen'>
+        <div className='flex justify-center items-center w-screen py-8 lg:py-0 min-h-screen bg-[#08040e]'>
             {/* for laptop & tablet view */}
             <div className='hidden md:block h-[70vh] w-[70vw] md:h-full md:w-[85vw] lg:w-[60vw] relative rounded-xl ring-3 ring-[#4acfff] shadow-[0px_0px_20px_8px_#016a90]'>
                 {/* ring-[#792aea] */}

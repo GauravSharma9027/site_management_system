@@ -254,7 +254,7 @@ export default function CreateContractPage() {
                                         project={p}
                                         selected={selectedId === p.projectId}
                                         // onSelect={() => setSelectedId(p.projectId)}
-                                        onSelect={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)}
+                                        onSelect={() => setShowScopeOfWorkModal(!showScopeOfWorkModal)}
                                     />
                                 ))
                             )}
@@ -280,9 +280,6 @@ export default function CreateContractPage() {
                                 </div>
                             </div>
                         )}
-
-      
-                        
                     </div>
                 </div>
 
@@ -291,7 +288,7 @@ export default function CreateContractPage() {
                     <DetailsModal project={selectedProject} onClose={() => setSelectedId(null)} />
                 )}
             </div>
-            <ScopeOfWorkModal className={` ${showScopeOfWorkModal?'fixed':'hidden'}`} onClick={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)} onClose={()=>setShowScopeOfWorkModal(!showScopeOfWorkModal)}/>
+            <ScopeOfWorkModal className={` ${showScopeOfWorkModal ? 'fixed' : 'hidden'}`} onClick={() => setShowScopeOfWorkModal(!showScopeOfWorkModal)} onClose={() => setShowScopeOfWorkModal(!showScopeOfWorkModal)} />
         </>
     );
 }
